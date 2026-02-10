@@ -8,8 +8,8 @@ output: html_document
 # Markdown 
 
 Markdown is a way to make fancy documnets. 
-make sure you "knit" often -- after every major chnage -- to mitigate errors. 
-Hashtags are how me make section levels of a doc. 
+make sure you "knit" often -- after every major change -- to mitigate errors. 
+Hashtags are how we make section levels of a doc. 
 
 ## Next level 
 ### Next level 
@@ -108,12 +108,25 @@ energy %>% names
 energy %>% head
 energy %>% tail
 energy %>% pull(Technology) %>% unique %>%  sort
+energy %>% pull(`Country/area`) %>% unique()
 ```
 
+```{r }
+#filter data 
+fenergy <- energy %>% 
+  filter(`Country/area` == 'United States of America (the)')
+```
 
-
-
-
+```{r }
+library(ggplot2)
+library(plotly)
+p <-ggplot(fenergy,
+       aes(x=Year,
+           y=as.numeric(`Electricity statistics`),
+           fill=Technology)) + #makes it be numeric
+  geom_area() 
+  ggplotly(p)
+```
 
 
 
